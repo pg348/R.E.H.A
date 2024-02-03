@@ -120,9 +120,11 @@ export const Login = () => {
               </Row>
               <Row>
                 <Col lg="12" className="form-group">
-                  <button className="btn ac_btn" type="submit">
-                    {formData.loading ? "Sending..." : "Login"}
-                  </button>
+                  <Link to="/main">
+                    <button className="btn ac_btn" type="submit">
+                      {formData.loading ? "Sending..." : "Login"}
+                    </button>
+                  </Link>
                 </Col>
               </Row>
               <p style={{ marginTop: "10px" }}>Don't have an account? <Link to="/signup" style={{ textDecoration: "underline" }}>Sign up</Link></p>

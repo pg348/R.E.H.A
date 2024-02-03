@@ -155,9 +155,11 @@ export const Signup = () => {
               </Row>
               <Row>
                 <Col lg="12" className="form-group">
+                  <Link to="/main">
                   <button className="btn ac_btn" type="submit">
                     {formData.loading ? "Sending..." : "Sign Up"}
                   </button>
+                  </Link>
                 </Col>
               </Row>
               <p style={{ marginTop: "10px" }}>Already have an account? <Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>
