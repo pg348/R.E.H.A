@@ -4,10 +4,12 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { introdata, meta } from "../../content_option";
 import { Link } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
-
+import { FaMicrophone } from "react-icons/fa";
+import { FaMicrophoneSlash } from "react-icons/fa";
 
 export const Main = () => {
   const [isHistoryOverlayVisible, setHistoryOverlayVisibility] = useState(false);
+  const [isMicrophoneEnabled, setMicrophoneEnabled] = useState(true);
 
   const showHistoryOverlay = () => {
     setHistoryOverlayVisibility(true);
@@ -25,6 +27,10 @@ export const Main = () => {
     hideHistoryOverlay();
   };
 
+  const toggleMicrophone = () => {
+    setMicrophoneEnabled(!isMicrophoneEnabled);
+  };
+
   return (
     <HelmetProvider>
       <section id="main" className="main">
@@ -35,6 +41,18 @@ export const Main = () => {
         </Helmet>
         <div style={{ width: "100%", height: "80vh" }}>
           <Spline scene="https://prod.spline.design/uFkJjzsj5h8iW49i/scene.splinecode" />
+        </div>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <button
+            style={{ borderRadius: "100px", height: "50px", width: "50px", transform: "translateY(-55px)" }}
+            onClick={toggleMicrophone}
+          >
+            {isMicrophoneEnabled ? (
+              <FaMicrophoneSlash style={{ height: "25px", width: "25px" }} />
+            ) : (
+              <FaMicrophone style={{ height: "25px", width: "25px" }} />
+            )}
+          </button>
         </div>
         <div className="intro mx-auto" style={{ textAlign: "center", position: "fixed", bottom: 20, left: 20 }}>
           <button className="btn ac_btn history" onClick={showHistoryOverlay}>History</button>
