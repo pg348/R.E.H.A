@@ -3,6 +3,8 @@ import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { introdata, meta } from "../../content_option";
 import { Link } from 'react-router-dom';
+import Spline from '@splinetool/react-spline';
+
 
 export const Main = () => {
   const [isHistoryOverlayVisible, setHistoryOverlayVisibility] = useState(false);
@@ -31,7 +33,9 @@ export const Main = () => {
           <title> {meta.title}</title>
           <meta name="description" content={meta.description} />
         </Helmet>
-        <div style={{ width: "100%", height: "80vh" }}></div>
+        <div style={{ width: "100%", height: "80vh" }}>
+          <Spline scene="https://prod.spline.design/uFkJjzsj5h8iW49i/scene.splinecode" />
+        </div>
         <div className="intro mx-auto" style={{ textAlign: "center", position: "fixed", bottom: 20, left: 20 }}>
           <button className="btn ac_btn history" onClick={showHistoryOverlay}>History</button>
         </div>
