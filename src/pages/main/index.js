@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
@@ -17,10 +17,15 @@ export const Main = () => {
   const splineRef = useRef(null);
   const [isAnimating, setAnimating] = useState(true);
   const [characterResponse, setCharacterResponse] = useState("");
+  const [sessionID, setSessionID] = useState(
+    localStorage.getItem("sessionID") | "-1"
+  );
   const mediaRecorderRef = useRef(null);
   const audioRef = useRef(null);
-
+  const cube = useRef();
   const objectToAnimate = useRef();
+  const spline = useRef();
+  console.log("Session Id at the", sessionID);
 
   // function onLoad(spline){
   //   const obj = spline.findObjectByName('Rhea');
@@ -30,6 +35,13 @@ export const Main = () => {
   // function triggerAnimation(){
   //   objectToAnimate.current.emitEvent('keyUp');
   // }
+  function onLoad(splineApp) {
+    // save the app in a ref for later use
+    spline.current = splineApp;
+  }
+  function triggerAnimation() {
+    spline.current.emitEvent("keyUp", "Rhea");
+  }
 
   const startRecording = () => {
     // const audioBlob = new Blob(chunks, { type: "audio/mp3" });
@@ -73,10 +85,69 @@ export const Main = () => {
                 const resultText = sttData.transcription;
                 setTranscription(resultText);
                 console.log("Transcription:", resultText);
+
+                const characterResponseUrl =
+                  "https://api.convai.com/character/getResponse";
+                const characterResponsePayload = new FormData();
+                characterResponsePayload.append("userText", resultText);
+                characterResponsePayload.append(
+                  "charID",
+                  "4dfa96ee-c2e8-11ee-b4bb-42010a40000f"
+                );
+                characterResponsePayload.append("sessionID", sessionID);
+                characterResponsePayload.append("voiceResponse", "True");
+
+                // Request character response
+                const characterResponseResponse = await fetch(
+                  characterResponseUrl,
+                  {
+                    method: "POST",
+                    headers: {
+                      "CONVAI-API-KEY": "b099f390cc31069c047e743cf9f1f908",
+                    },
+                    body: characterResponsePayload,
+                  }
+                );
+                if (characterResponseResponse.ok) {
+                  const characterResponseData =
+                    await characterResponseResponse.json();
+                  setCharacterResponse(characterResponseData.text);
+
+                  // Convert the base64 audio to a Blob
+                  const base64AudioString = characterResponseData.audio;
+                  const byteCharacters = atob(base64AudioString);
+                  const byteNumbers = new Array(byteCharacters.length);
+
+                  for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                  }
+
+                  const byteArray = new Uint8Array(byteNumbers);
+                  const audioBlob = new Blob([byteArray], {
+                    type: "audio/wav",
+                  });
+                  setAudioBlob(audioBlob);
+
+                  // Create an audio element and auto-play
+                  const audioElement = new Audio(
+                    URL.createObjectURL(audioBlob)
+                  );
+                  audioElement
+                    .play()
+                    .catch((error) =>
+                      console.error("Error playing audio:", error)
+                    );
+                  triggerAnimation();
+                } else {
+                  console.error(
+                    "Error getting character response:",
+                    characterResponseResponse.statusText
+                  );
+                }
               }
             };
+            // convertToBase64();
           }
-          // convertToBase64();
         };
 
         mediaRecorder.start();
@@ -85,6 +156,11 @@ export const Main = () => {
       })
       .catch((error) => console.error("Error accessing microphone:", error));
   };
+
+  useEffect(() => {
+    // Run your async function when the component mounts
+    sayingHi();
+  }, []);
 
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
@@ -124,7 +200,63 @@ export const Main = () => {
     }
   };
 
-  
+  const sayingHi = async () => {
+    if (sessionID == -1) {
+      console.log("Im here");
+      const characterResponseUrl =
+        "https://api.convai.com/character/getResponse";
+      const characterResponsePayload = new FormData();
+      characterResponsePayload.append("userText", "say, 'Hey There!'");
+      characterResponsePayload.append(
+        "charID",
+        "4dfa96ee-c2e8-11ee-b4bb-42010a40000f"
+      );
+      characterResponsePayload.append("sessionID", sessionID);
+      characterResponsePayload.append("voiceResponse", "True");
+
+      // Request character response
+      const characterResponseResponse = await fetch(characterResponseUrl, {
+        method: "POST",
+        headers: {
+          "CONVAI-API-KEY": "b099f390cc31069c047e743cf9f1f908",
+        },
+        body: characterResponsePayload,
+      });
+
+      if (characterResponseResponse.ok) {
+        const characterResponseData = await characterResponseResponse.json();
+        setCharacterResponse(characterResponseData.text);
+        console.log("Session Id", characterResponseData.sessionID);
+        setSessionID(characterResponseData.sessionID);
+        localStorage.setItem("sessionID", characterResponseData.sessionID);
+
+        // Convert the base64 audio to a Blob
+        const base64AudioString = characterResponseData.audio;
+        const byteCharacters = atob(base64AudioString);
+        const byteNumbers = new Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        const audioBlob = new Blob([byteArray], { type: "audio/wav" });
+        setAudioBlob(audioBlob);
+
+        // Create an audio element and auto-play
+        const audioElement = new Audio(URL.createObjectURL(audioBlob));
+        audioElement
+          .play()
+          .catch((error) => console.error("Error playing audio:", error));
+      } else {
+        console.error(
+          "Error getting character response:",
+          characterResponseResponse.statusText
+        );
+      }
+    }
+  };
+
   const showHistoryOverlay = () => {
     setHistoryOverlayVisibility(true);
   };
@@ -173,6 +305,7 @@ export const Main = () => {
             <Spline
               ref={splineRef}
               scene="https://prod.spline.design/l5oYvKDkrSWL8W2I/scene.splinecode"
+              onLoad={onLoad}
               style={{
                 position: "absolute",
                 width: "100%",
