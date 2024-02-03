@@ -6,7 +6,7 @@ import { meta } from "../../content_option";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { contactConfig } from "../../content_option";
 
-export const ContactUs = () => {
+export const LoginSignUp = () => {
   const [formData, setFormdata] = useState({
     email: "",
     name: "",
