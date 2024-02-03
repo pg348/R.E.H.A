@@ -156,9 +156,14 @@ export const Signup = () => {
               <Row>
                 <Col lg="12" className="form-group">
                   <Link to="/main">
-                  <button className="btn ac_btn" type="submit">
-                    {formData.loading ? "Sending..." : "Sign Up"}
-                  </button>
+                    <button className="btn ac_btn" type="submit">
+                      {formData.loading ? "Sending..." : "Sign Up"}
+                    </button>
+                  </Link>
+                  <Link to="/main">
+                    <button className="btn ac_btn" type="submit">
+                      {formData.loading ? "Sending..." : "Signup using Google"}
+                    </button>
                   </Link>
                 </Col>
               </Row>

@@ -39,6 +39,9 @@ export const Main = () => {
         <div className="intro mx-auto" style={{ textAlign: "center", position: "fixed", bottom: 20, left: 20 }}>
           <button className="btn ac_btn history" onClick={showHistoryOverlay}>History</button>
         </div>
+        <div className="intro mx-auto username" style={{ textAlign: "center", position: "fixed", bottom: 4, left: "42vw" }}>
+          <h1>Hello,</h1>
+        </div>
         <div className="intro mx-auto" style={{ textAlign: "center", position: "fixed", bottom: 20, right: 0 }}>
           <Link to="/home"><button className="btn ac_btn signout">Sign out</button></Link>
         </div>
