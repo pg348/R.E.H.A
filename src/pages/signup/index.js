@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
 import { Container, Row, Col, Alert, Button, FormControl, InputGroup } from "react-bootstrap";
 import { contactConfig } from "../../content_option";
+import { Link } from 'react-router-dom';
 
 export const Signup = () => {
   const [formData, setFormdata] = useState({
@@ -159,7 +160,8 @@ export const Signup = () => {
                   </button>
                 </Col>
               </Row>
-              <p style={{ marginTop: "10px" }}>Already have an account? <a style={{ textDecoration: "underline" }}> Login</a></p>
+              <p style={{ marginTop: "10px" }}>Already have an account? <Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>
+              </p>
             </form>
           </Col>
         </Row>
