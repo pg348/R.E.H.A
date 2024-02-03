@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./style.css"; // Import your CSS file containing styles
+import "./style.css"; 
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { introdata, meta } from "../../content_option";
+import { meta } from "../../content_option";
 import { Link } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
 import { FaMicrophone } from "react-icons/fa";
