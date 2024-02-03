@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { introdata, meta } from "../../content_option";
+import { Link } from 'react-router-dom';
 
 export const Main = () => {
   const [isHistoryOverlayVisible, setHistoryOverlayVisibility] = useState(false);
@@ -35,7 +36,7 @@ export const Main = () => {
           <button className="btn ac_btn history" onClick={showHistoryOverlay}>History</button>
         </div>
         <div className="intro mx-auto" style={{ textAlign: "center", position: "fixed", bottom: 20, right: 0 }}>
-          <button className="btn ac_btn signout">Sign out</button>
+          <Link to="/home"><button className="btn ac_btn signout">Sign out</button></Link>
         </div>
 
         {isHistoryOverlayVisible && (
