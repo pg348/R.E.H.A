@@ -19,14 +19,24 @@ export const Portfolio = () => {
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
-        <div className="mb-5 po_items_ho">
+        <div className="mb-5 po_items_ho" style={{ display: 'flex', justifyContent: 'center' }}>
           {dataportfolio.map((data, i) => {
             return (
               <div key={i} className="po_item video-holder">
-                <div style={{ width: '500px', height: '300px' }}>
-                  <video src={data.video} controls>
+                <div style={{ width: '850px', height: '450px' }}>
+                  <iframe width="830" height="390" 
+                  src="https://www.youtube.com/embed/EVF_AuhJgLg" 
+                  title="Stunning Sunset Seen From The Sea | Time lapse | 10 Seconds Video | Nature Blogs" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; 
+                  clipboard-write; 
+                  encrypted-media; gyroscope; 
+                  picture-in-picture; web-share" 
+                  allowfullscreen>
+                  </iframe>
+                  {/* <video src={data.video} controls>
                     Your browser does not support the video tag.
-                  </video>
+                  </video> */}
                 </div>
               </div>
             );
