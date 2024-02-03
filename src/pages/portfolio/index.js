@@ -23,14 +23,16 @@ export const Portfolio = () => {
           {dataportfolio.map((data, i) => {
             return (
               <div key={i} className="po_item video-holder">
-                <video src={data.video} controls>
-                  Your browser does not support the video tag.
-                </video>
+                <div style={{ width: '500px', height: '300px' }}>
+                  <video src={data.video} controls>
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
             );
           })}
         </div>
       </Container>
-    </HelmetProvider>
+    </HelmetProvider >
   );
 };
