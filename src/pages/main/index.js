@@ -81,7 +81,9 @@ export const Main = () => {
           <div className="overlay" onClick={handleOverlayClick}>
             {/* Your overlay content goes here */}
             <div className="overlay-content content" onClick={preventPropagation}>
+              <div>
               <button className="btn ac_btn chat">New chat</button>
+              </div>
               <p style={{ marginTop: "15px", fontWeight: "bold" }}>Previous Chats</p>
               <button className="close-btn" onClick={hideHistoryOverlay}>Close</button>
             </div>
