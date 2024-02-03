@@ -39,8 +39,21 @@ export const Main = () => {
           <title> {meta.title}</title>
           <meta name="description" content={meta.description} />
         </Helmet>
-        <div style={{ width: "100%", height: "80vh" }}>
-          <Spline scene="https://prod.spline.design/uFkJjzsj5h8iW49i/scene.splinecode" />
+        <div style={{
+          width: "100%", height: "80vh",
+          overflow: "hidden",
+          position: "relative",
+        }}>
+          <Spline scene="https://prod.spline.design/uFkJjzsj5h8iW49i/scene.splinecode"
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              top: "0%",
+              left: "0%",
+              // transform: "translate(-50%, -50%) scale(0.8)",
+            }}
+          />
         </div>
         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <button
