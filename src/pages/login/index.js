@@ -44,27 +44,9 @@ export const Login = () => {
           variant: "success",
           show: true,
         });
-        try {
-          const { user, session, error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-              queryParams: {
-                access_type: "offline",
-                prompt: "consent",
-              },
-            },
-          });
 
-          if (error) {
-            alert(error.message);
-          } else {
-            alert("Google sign up successful");
-            window.location.href = "./main";
-            // Redirect or perform other actions after successful sign-up with Google
-          }
-        } catch (error) {
-          console.error("Error signing up with Google:", error.message);
-        }
+        // Redirect or perform other actions after successful login
+        window.location.href = "./main";
       }
     } catch (error) {
       console.error("Error logging in:", error.message);
@@ -135,9 +117,6 @@ export const Login = () => {
                 <Col lg="12" className="form-group">
                   <Button className="btn ac_btn" type="submit" disabled={formData.loading}>
                     {formData.loading ? "Logging in..." : "Login"}
-                  </Button>
-                  <Button className="btn ac_btn" type="submit" disabled={formData.loading}>
-                    {formData.loading ? "Logging in..." : "Login using Google"}
                   </Button>
                 </Col>
               </Row>
