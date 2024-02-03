@@ -37,8 +37,14 @@ const Headermain = () => {
                   <li className="menu_item ">
                     <Link onClick={handleToggle} to="/" className="my-3">Home</Link>
                   </li>
-                  <li className="menu_item ">
-                    <Link onClick={handleToggle} to="/login-signup" className="my-3">Login/Signup</Link>
+                  <li style={{ display: "inline-block", marginRight: "10px" }} className="menu_item">
+                    <Link onClick={handleToggle} to="/login" className="my-3">Login</Link>
+                  </li>
+                  <li style={{ display: "inline-block", marginRight: "10px" }} className="menu_item">
+                    <li style={{ fontSize: "80px" }}>/</li>
+                  </li>
+                  <li style={{ display: "inline-block" }} className="menu_item">
+                    <Link onClick={handleToggle} to="/signup" className="my-3">Signup</Link>
                   </li>
                   <li className="menu_item">
                     <Link onClick={handleToggle} to="/portfolio" className="my-3"> Tutorial</Link>

@@ -3,18 +3,16 @@ import * as emailjs from "emailjs-com";
 import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { Container, Row, Col, Alert, Button, FormControl, InputGroup } from "react-bootstrap";
 import { contactConfig } from "../../content_option";
+import { Link } from 'react-router-dom';
 
-export const LoginSignUp = () => {
+export const Login = () => {
   const [formData, setFormdata] = useState({
     email: "",
-    name: "",
-    message: "",
     loading: false,
     show: false,
-    alertmessage: "",
-    variant: "",
+    password: "",
   });
 
   const handleSubmit = (e) => {
@@ -64,17 +62,18 @@ export const LoginSignUp = () => {
     });
   };
 
+
   return (
     <HelmetProvider>
       <Container>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>{meta.title} | Contact</title>
+          <title>{meta.title} | LoginSignUp</title>
           <meta name="description" content={meta.description} />
         </Helmet>
         <Row className="mb-5 mt-3 pt-md-3">
           <Col lg="8">
-            <h1 className="display-4 mb-4">Contact Me</h1>
+            <h1 className="display-4 mb-4">Login</h1>
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
@@ -91,41 +90,10 @@ export const LoginSignUp = () => {
               <p className="my-0">{formData.alertmessage}</p>
             </Alert>
           </Col>
-          <Col lg="5" className="mb-5">
-            <h3 className="color_sec py-4">Get in touch</h3>
-            <address>
-              <strong>Email:</strong>{" "}
-              <a href={`mailto:${contactConfig.YOUR_EMAIL}`}>
-                {contactConfig.YOUR_EMAIL}
-              </a>
-              <br />
-              <br />
-              {contactConfig.hasOwnProperty("YOUR_FONE") ? (
-                <p>
-                  <strong>Phone:</strong> {contactConfig.YOUR_FONE}
-                </p>
-              ) : (
-                ""
-              )}
-            </address>
-            <p>{contactConfig.description}</p>
-          </Col>
           <Col lg="7" className="d-flex align-items-center">
             <form onSubmit={handleSubmit} className="contact__form w-100">
               <Row>
-                <Col lg="6" className="form-group">
-                  <input
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                    value={formData.name || ""}
-                    type="text"
-                    required
-                    onChange={handleChange}
-                  />
-                </Col>
-                <Col lg="6" className="form-group">
+                <Col lg="10" className="form-group">
                   <input
                     className="form-control rounded-0"
                     id="email"
@@ -137,25 +105,27 @@ export const LoginSignUp = () => {
                     onChange={handleChange}
                   />
                 </Col>
+                <Col lg="10" className="form-group">
+                  <input
+                    className="form-control rounded-0"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    type="password"   //aankh laga diyo password dekhne k liye
+                    value={formData.password || ""}
+                    required
+                    onChange={handleChange}
+                  />
+                </Col>
               </Row>
-              <textarea
-                className="form-control rounded-0"
-                id="message"
-                name="message"
-                placeholder="Message"
-                rows="5"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-              <br />
               <Row>
                 <Col lg="12" className="form-group">
                   <button className="btn ac_btn" type="submit">
-                    {formData.loading ? "Sending..." : "Send"}
+                    {formData.loading ? "Sending..." : "Login"}
                   </button>
                 </Col>
               </Row>
+              <p style={{ marginTop: "10px" }}>Don't have an account? <Link to="/signup" style={{ textDecoration: "underline" }}>Sign up</Link></p>
             </form>
           </Col>
         </Row>
