@@ -115,9 +115,11 @@ export const Login = () => {
               </Row>
               <Row>
                 <Col lg="12" className="form-group">
-                  <Button className="btn ac_btn" type="submit" disabled={formData.loading}>
+                  <button className="btn ac_btn" 
+                  type="submit" 
+                  disabled={formData.loading}>
                     {formData.loading ? "Logging in..." : "Login"}
-                  </Button>
+                  </button>
                 </Col>
               </Row>
               <p style={{ marginTop: "10px" }}>
