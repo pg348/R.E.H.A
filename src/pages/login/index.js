@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import * as emailjs from "emailjs-com";
-import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
-import { Container, Row, Col, Alert, Button, FormControl, InputGroup } from "react-bootstrap";
-import { contactConfig } from "../../content_option";
+import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://nkotlqqoqgudqbsjygmn.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5rb3RscXFvcWd1ZHFic2p5Z21uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY3ODg4MjQsImV4cCI6MjAyMjM2NDgyNH0.M4PpTHMpIDkE8tSl3s1VirL5vI6H6UrYWx53alfIorQ"
+);
 
 export const Login = () => {
   const [formData, setFormdata] = useState({
@@ -15,44 +18,57 @@ export const Login = () => {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormdata({ loading: true });
+    setFormdata({ ...formData, loading: true });
 
-    const templateParams = {
-      from_name: formData.email,
-      user_name: formData.name,
-      to_name: contactConfig.YOUR_EMAIL,
-      message: formData.message,
-    };
+    try {
+      const { user, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    emailjs
-      .send(
-        contactConfig.YOUR_SERVICE_ID,
-        contactConfig.YOUR_TEMPLATE_ID,
-        templateParams,
-        contactConfig.YOUR_USER_ID
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setFormdata({
-            loading: false,
-            alertmessage: "SUCCESS! ,Thankyou for your messege",
-            variant: "success",
-            show: true,
+      if (error) {
+        setFormdata({
+          ...formData,
+          loading: false,
+          alertmessage: error.message,
+          variant: "danger",
+          show: true,
+        });
+      } else {
+        setFormdata({
+          ...formData,
+          loading: false,
+          alertmessage: "Login successful",
+          variant: "success",
+          show: true,
+        });
+        try {
+          const { user, session, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+              queryParams: {
+                access_type: "offline",
+                prompt: "consent",
+              },
+            },
           });
-        },
-        (error) => {
-          console.log(error.text);
-          setFormdata({
-            alertmessage: `Faild to send!,${error.text}`,
-            variant: "danger",
-            show: true,
-          });
-          document.getElementsByClassName("co_alert")[0].scrollIntoView();
+
+          if (error) {
+            alert(error.message);
+          } else {
+            alert("Google sign up successful");
+            window.location.href = "./main";
+            // Redirect or perform other actions after successful sign-up with Google
+          }
+        } catch (error) {
+          console.error("Error signing up with Google:", error.message);
         }
-      );
+      }
+    } catch (error) {
+      console.error("Error logging in:", error.message);
+    }
   };
 
   const handleChange = (e) => {
@@ -61,7 +77,6 @@ export const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
 
   return (
     <HelmetProvider>
@@ -80,11 +95,9 @@ export const Login = () => {
         <Row className="sec_sp">
           <Col lg="12">
             <Alert
-
               variant={formData.variant}
-              className={`rounded-0 co_alert ${formData.show ? "d-block" : "d-none"
-                }`}
-              onClose={() => setFormdata({ show: false })}
+              className={`rounded-0 co_alert ${formData.show ? "d-block" : "d-none"}`}
+              onClose={() => setFormdata({ ...formData, show: false })}
               dismissible
             >
               <p className="my-0">{formData.alertmessage}</p>
@@ -111,7 +124,7 @@ export const Login = () => {
                     id="password"
                     name="password"
                     placeholder="Password"
-                    type="password"   //aankh laga diyo password dekhne k liye
+                    type="password"
                     value={formData.password || ""}
                     required
                     onChange={handleChange}
@@ -120,19 +133,17 @@ export const Login = () => {
               </Row>
               <Row>
                 <Col lg="12" className="form-group">
-                  <Link to="/main">
-                    <button className="btn ac_btn" type="submit">
-                      {formData.loading ? "Sending..." : "Login"}
-                    </button>
-                  </Link>
-                  <Link to="/main">
-                    <button className="btn ac_btn" type="submit">
-                      {formData.loading ? "Sending..." : "Login using Google"}
-                    </button>
-                  </Link>
+                  <Button className="btn ac_btn" type="submit" disabled={formData.loading}>
+                    {formData.loading ? "Logging in..." : "Login"}
+                  </Button>
+                  <Button className="btn ac_btn" type="submit" disabled={formData.loading}>
+                    {formData.loading ? "Logging in..." : "Login using Google"}
+                  </Button>
                 </Col>
               </Row>
-              <p style={{ marginTop: "10px" }}>Don't have an account? <Link to="/signup" style={{ textDecoration: "underline" }}>Sign up</Link></p>
+              <p style={{ marginTop: "10px" }}>
+                Don't have an account? <Link to="/signup" style={{ textDecoration: "underline" }}>Sign up</Link>
+              </p>
             </form>
           </Col>
         </Row>

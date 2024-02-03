@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import * as emailjs from "emailjs-com";
-import "./style.css";
+import { createClient } from "@supabase/supabase-js";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
-import { Container, Row, Col, Alert, Button, FormControl, InputGroup } from "react-bootstrap";
-import { contactConfig } from "../../content_option";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+
+import { contactConfig } from "../../content_option";
+
+const supabase = createClient(
+  "https://nkotlqqoqgudqbsjygmn.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5rb3RscXFvcWd1ZHFic2p5Z21uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY3ODg4MjQsImV4cCI6MjAyMjM2NDgyNH0.M4PpTHMpIDkE8tSl3s1VirL5vI6H6UrYWx53alfIorQ"
+);
 
 export const Signup = () => {
   const [formData, setFormdata] = useState({
@@ -17,8 +22,64 @@ export const Signup = () => {
     confirmPassword: "",
   });
 
+  const handleSupabaseSignUp = async () => {
+    try {
+      const { user, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (error) {
+        setFormdata({
+          ...formData,
+          alertmessage: error.message,
+          variant: "danger",
+          show: true,
+        });
+      } else {
+        setFormdata({
+          ...formData,
+          alertmessage: "Sign up successful. Confirmation mail is sent. Click on it.",
+          variant: "success",
+          show: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error signing up with Supabase:", error.message);
+    }
+  };
+
+
+
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const { user, session, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          queryParams: {
+            access_type: "offline",
+            prompt: "consent",
+          },
+        },
+      });
+
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Google sign up successful");
+        window.location.href = "./main";
+        // Redirect or perform other actions after successful sign-up with Google
+      }
+    } catch (error) {
+      console.error("Error signing up with Google:", error.message);
+    }
+
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       setFormdata({
         ...formData,
@@ -26,45 +87,15 @@ export const Signup = () => {
         variant: "danger",
         show: true,
       });
-      return; // Stop the submission if passwords don't match
+      return;
     }
 
-    setFormdata({ loading: true });
+    setFormdata({ ...formData, loading: true });
 
-    const templateParams = {
-      from_name: formData.email,
-      user_name: formData.name,
-      to_name: contactConfig.YOUR_EMAIL,
-      message: formData.message,
-    };
+    // No email.js functionality
 
-    emailjs
-      .send(
-        contactConfig.YOUR_SERVICE_ID,
-        contactConfig.YOUR_TEMPLATE_ID,
-        templateParams,
-        contactConfig.YOUR_USER_ID
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setFormdata({
-            loading: false,
-            alertmessage: "SUCCESS! ,Thankyou for your messege",
-            variant: "success",
-            show: true,
-          });
-        },
-        (error) => {
-          console.log(error.text);
-          setFormdata({
-            alertmessage: `Faild to send!,${error.text}`,
-            variant: "danger",
-            show: true,
-          });
-          document.getElementsByClassName("co_alert")[0].scrollIntoView();
-        }
-      );
+    // After sending email, sign up with Supabase
+    handleSupabaseSignUp();
   };
 
   const handleChange = (e) => {
@@ -91,7 +122,6 @@ export const Signup = () => {
         <Row className="sec_sp">
           <Col lg="12">
             <Alert
-
               variant={formData.variant}
               className={`rounded-0 co_alert ${formData.show ? "d-block" : "d-none"
                 }`}
@@ -134,7 +164,7 @@ export const Signup = () => {
                     id="password"
                     name="password"
                     placeholder="Password"
-                    type="password"   //aankh laga diyo password dekhne k liye
+                    type="password"
                     value={formData.password || ""}
                     required
                     onChange={handleChange}
@@ -146,7 +176,7 @@ export const Signup = () => {
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Confirm Password"
-                    type="password"   //aankh laga diyo password dekhne k liye
+                    type="password"
                     value={formData.confirmPassword || ""}
                     required
                     onChange={handleChange}
@@ -155,19 +185,16 @@ export const Signup = () => {
               </Row>
               <Row>
                 <Col lg="12" className="form-group">
-                  <Link to="/main">
-                    <button className="btn ac_btn" type="submit">
-                      {formData.loading ? "Sending..." : "Sign Up"}
-                    </button>
-                  </Link>
-                  <Link to="/main">
-                    <button className="btn ac_btn" type="submit">
-                      {formData.loading ? "Sending..." : "Signup using Google"}
-                    </button>
-                  </Link>
+                  <button className="btn ac_btn" type="submit">
+                    {formData.loading ? "Sending..." : "Sign Up"}
+                  </button>
+                  <button className="btn ac_btn" type="button" onClick={handleGoogleSignIn}>
+                    {formData.loading ? "Sending..." : "Signup using Google"}
+                  </button>
                 </Col>
               </Row>
-              <p style={{ marginTop: "10px" }}>Already have an account? <Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>
+              <p style={{ marginTop: "10px" }}>
+                Already have an account? <Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>
               </p>
             </form>
           </Col>
