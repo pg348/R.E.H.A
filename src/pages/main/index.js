@@ -338,7 +338,7 @@ export const Main = () => {
                 borderRadius: "100px",
                 height: "50px",
                 width: "50px",
-                transform: "translateY(-55px)",
+                transform: "translateY(15px)",
               }}
               onClick={toggleMicrophone}
             >
@@ -348,30 +348,6 @@ export const Main = () => {
                 <FaMicrophone style={{ height: "25px", width: "25px" }} />
               )}
             </button>
-          </div>
-          <div
-            className="intro mx-auto"
-            style={{
-              textAlign: "center",
-              position: "fixed",
-              bottom: 20,
-              left: 20,
-            }}
-          >
-            <button className="btn ac_btn history" onClick={showHistoryOverlay}>
-              History
-            </button>
-          </div>
-          <div
-            className="intro mx-auto username"
-            style={{
-              textAlign: "center",
-              position: "fixed",
-              bottom: 4,
-              left: "42vw",
-            }}
-          >
-            <h1>Hello,</h1>
           </div>
           <div
             className="intro mx-auto"
