@@ -314,7 +314,7 @@ export const Main = () => {
           >
             <Spline
               ref={splineRef}
-              scene="https://prod.spline.design/l5oYvKDkrSWL8W2I/scene.splinecode"
+              scene="https://prod.spline.design/qw1IUBfRp88OHqzK/scene.splinecode"
               onLoad={onLoad}
               style={{
                 position: "absolute",
