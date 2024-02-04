@@ -10,6 +10,7 @@ import { FaMicrophoneSlash } from "react-icons/fa";
 export const Main = () => {
   const [isHistoryOverlayVisible, setHistoryOverlayVisibility] =
     useState(false);
+  // localStorage.setItem("sessionID", -1);
   const [transcription, setTranscription] = useState("");
   const [isMicrophoneEnabled, setMicrophoneEnabled] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -18,7 +19,7 @@ export const Main = () => {
   const [isAnimating, setAnimating] = useState(true);
   const [characterResponse, setCharacterResponse] = useState("");
   const [sessionID, setSessionID] = useState(
-    localStorage.getItem("sessionID") | "-1"
+    "63fc04adf0c28bfdac3114e990921e79"
   );
   const mediaRecorderRef = useRef(null);
   const audioRef = useRef(null);
@@ -41,6 +42,10 @@ export const Main = () => {
   }
   function triggerAnimation() {
     spline.current.emitEvent("keyUp", "Rhea");
+  }
+
+  function triggerAnimation2() {
+    spline.current.emitEvent("keyDown", "Rhea");
   }
 
   const startRecording = () => {
@@ -67,7 +72,7 @@ export const Main = () => {
             reader.onloadend = async () => {
               const base64Data = reader.result.split(",")[1];
               console.log("Base64 audio data:", base64Data);
-
+              triggerAnimation2();
               // Send the base64 data to the API for transcription
               const sttResponse = await fetch(
                 "http://127.0.0.1:8000/convert_and_transcribe",
@@ -159,6 +164,7 @@ export const Main = () => {
 
   useEffect(() => {
     // Run your async function when the component mounts
+
     sayingHi();
   }, []);
 
@@ -228,7 +234,11 @@ export const Main = () => {
         setCharacterResponse(characterResponseData.text);
         console.log("Session Id", characterResponseData.sessionID);
         setSessionID(characterResponseData.sessionID);
-        localStorage.setItem("sessionID", characterResponseData.sessionID);
+        caches.open("your-cache-name").then((cache) => {
+          // Store data in the cache
+          cache.put("sessionID", new Response(characterResponseData.sessionID));
+        });
+        // localStorage.setItem("sessionID", characterResponseData.sessionID);
 
         // Convert the base64 audio to a Blob
         const base64AudioString = characterResponseData.audio;
@@ -373,7 +383,12 @@ export const Main = () => {
             }}
           >
             <Link to="/home">
-              <button className="btn ac_btn signout">Sign out</button>
+              <button
+                className="btn ac_btn signout"
+                onClick={localStorage.clear()}
+              >
+                Sign out
+              </button>
             </Link>
           </div>
         </div>
