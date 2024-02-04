@@ -31,7 +31,7 @@ export const About = () => {
           </Col>
           <Col lg="7" className="d-flex align-items-center">
             <div>
-              <p>{dataabout.aboutme}</p>
+              <p>{dataabout.aboutme}<br />I'm here to assist you with information, answer your questions, and provide a helping hand through voice interactions. With the power of artificial intelligence, I aim to make your tasks easier and more enjoyable. Feel free to ask me anything or have a casual chat – I'm always ready to lend an ear.<br />Simply click the mic button to start a conversation. Looking forward to chatting with you!"</p>
             </div>
           </Col>
         </Row>

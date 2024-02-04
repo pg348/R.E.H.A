@@ -363,17 +363,6 @@ export const Main = () => {
             </button>
           </div>
           <div
-            className="intro mx-auto username"
-            style={{
-              textAlign: "center",
-              position: "fixed",
-              bottom: 4,
-              left: "42vw",
-            }}
-          >
-            <h1>Hello,</h1>
-          </div>
-          <div
             className="intro mx-auto"
             style={{
               textAlign: "center",

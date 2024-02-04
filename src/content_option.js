@@ -17,65 +17,61 @@ const introdata = {
 
 const dataabout = {
     title: "abit about my self",
-    aboutme: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dolor id ligula semper elementum feugiat pretium nulla. Nunc non commodo dolor. Nunc mollis dignissim facilisis. Morbi ut magna ultricies.",
+    aboutme: "Hello, I'm Rhea – Your AI Companion! 🌟 ",
 };
 const worktimeline = [{
-        jobtitle: "Check",
-        where: "WOrkholder",
-        date: "Video",
-    },
-    {
-        jobtitle: "Check",
-        where: "WOrkholder",
-        date: "Video",
-    },
-    {
-        jobtitle: "Check",
-        where: "WOrkholder",
-        date: "Video",
-    },
+    jobtitle: "Check",
+    where: "WOrkholder",
+    date: "Video",
+},
+{
+    jobtitle: "Check",
+    where: "WOrkholder",
+    date: "Video",
+},
+{
+    jobtitle: "Check",
+    where: "WOrkholder",
+    date: "Video",
+},
 ];
 
 const skills = [{
-        name: "Feelings",
-        value: 90,
-    },
-    {
-        name: "Emotion",
-        value: 85,
-    },
-    {
-        name: "Anger",
-        value: 10,
-    },
-    {
-        name: "Sad",
-        value: 40,
-    },
-    {
-        name: "Happiness",
-        value: 100,
-    },
+    name: "Feelings",
+    value: 90,
+},
+{
+    name: "Emotion",
+    value: 85,
+},
+{
+    name: "Anger",
+    value: 10,
+},
+{
+    name: "Sad",
+    value: 40,
+},
+{
+    name: "Happiness",
+    value: 100,
+},
 ];
 
 const services = [{
-        title: "Emotion",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
-    {
-        title: "Happiness",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
-    {
-        title: "How to Check?",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
+    title: "Knowledgeable Conversations 🧠",
+    description: " Rhea is your go-to companion for thought-provoking conversations. Ask questions, share thoughts, and explore a world of knowledge together.",
+},
+{
+    title: "Fun and Friendly Banter 😄",
+    description: "Beyond tasks, Rhea loves a good chat! Engage in lighthearted conversations, jokes, and playful banter. Your friendly AI companion is here to bring a smile to your face.",
+},
 ];
 
 const dataportfolio = [{
     video: "https://www.youtube.com/watch?v=xuP4g7IDgDM&ab_channel=NatureBlogs",
     link: "#",
-    }
+}
 ];
 
 const contactConfig = {
@@ -104,5 +100,5 @@ export {
     contactConfig,
     socialprofils,
     logotext,
-    
+
 };
