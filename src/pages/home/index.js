@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Typewriter from "typewriter-effect";
 import { introdata, meta } from "../../content_option";
 import { Link } from "react-router-dom";
-import Spline from '@splinetool/react-spline'; 
+import Spline from "@splinetool/react-spline";
 
 export const Home = () => {
   return (
@@ -18,7 +18,7 @@ export const Home = () => {
         <div className="intro_sec d-block d-lg-flex align-items-center ">
           <div className="h_bg-image order-1 order-lg-2 h-100">
             {/* Replace the image with Spline component */}
-            <Spline scene="https://prod.spline.design/uFkJjzsj5h8iW49i/scene.splinecode" />
+            <Spline scene="https://prod.spline.design/qw1IUBfRp88OHqzK/scene.splinecode" />
           </div>
           <div className="text order-2 order-lg-1 h-100 d-lg-flex justify-content-center">
             <div className="align-self-center">
@@ -65,20 +65,6 @@ export const Home = () => {
     </HelmetProvider>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React from "react";
 // import "./style.css";
@@ -131,7 +117,7 @@ export const Home = () => {
 //                   </Link>
 //                   <Link to="/contact">
 //                     <div id="button_h" className="ac_btn btn">
-//                       Contact 
+//                       Contact
 //                       <div className="ring one"></div>
 //                       <div className="ring two"></div>
 //                       <div className="ring three"></div>

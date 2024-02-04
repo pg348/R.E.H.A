@@ -314,7 +314,7 @@ export const Main = () => {
           >
             <Spline
               ref={splineRef}
-              scene="https://prod.spline.design/qw1IUBfRp88OHqzK/scene.splinecode"
+              scene="https://prod.spline.design/l5oYvKDkrSWL8W2I/scene.splinecode"
               onLoad={onLoad}
               style={{
                 position: "absolute",
@@ -361,6 +361,17 @@ export const Main = () => {
             <button className="btn ac_btn history" onClick={showHistoryOverlay}>
               History
             </button>
+          </div>
+          <div
+            className="intro mx-auto username"
+            style={{
+              textAlign: "center",
+              position: "fixed",
+              bottom: 4,
+              left: "42vw",
+            }}
+          >
+            <h1>Hello,</h1>
           </div>
           <div
             className="intro mx-auto"
