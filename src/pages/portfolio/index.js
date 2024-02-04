@@ -19,28 +19,34 @@ export const Portfolio = () => {
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
-        <div className="mb-5 po_items_ho" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          className="mb-5 po_items_ho"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           {dataportfolio.map((data, i) => {
             return (
               <div key={i} className="po_item">
-                <div 
-                style={{ 
-                  width: '100%',
-                  maxWidth: '850px', 
-                  height: '450px',
-                  margin: '0 auto',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center' 
-                  }}>
-                  <iframe width="830" height="390" 
-                    src="https://www.youtube.com/embed/zqGW6x_5N0k" 
-                    title="Test" 
-                    frameborder="0" 
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "850px",
+                    height: "450px",
+                    margin: "0 auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <iframe
+                    width="830"
+                    height="390"
+                    src="https://www.youtube.com/embed/hFb1lvSbA-I"
+                    title="Realistic Human Emulation Assistant (R.H.E.A)"
+                    frameborder="0"
                     allow="accelerometer; autoplay; 
                     clipboard-write; 
                     encrypted-media; gyroscope; 
-                    picture-in-picture; web-share" 
+                    picture-in-picture; web-share"
                     allowfullscreen
                   ></iframe>
                 </div>
@@ -49,19 +55,9 @@ export const Portfolio = () => {
           })}
         </div>
       </Container>
-    </HelmetProvider >
+    </HelmetProvider>
   );
 };
-
-
-
-
-
-
-
-
-
-
 
 // import React from "react";
 // import "./style.css";
@@ -89,14 +85,14 @@ export const Portfolio = () => {
 //             return (
 //               <div key={i} className="po_item video-holder">
 //                 <div style={{ width: '850px', height: '450px' }}>
-//                   <iframe width="830" height="390" 
-//                   src="https://www.youtube.com/embed/EVF_AuhJgLg" 
-//                   title="Test" 
-//                   frameborder="0" 
-//                   allow="accelerometer; autoplay; 
-//                   clipboard-write; 
-//                   encrypted-media; gyroscope; 
-//                   picture-in-picture; web-share" 
+//                   <iframe width="830" height="390"
+//                   src="https://www.youtube.com/embed/EVF_AuhJgLg"
+//                   title="Test"
+//                   frameborder="0"
+//                   allow="accelerometer; autoplay;
+//                   clipboard-write;
+//                   encrypted-media; gyroscope;
+//                   picture-in-picture; web-share"
 //                   allowfullscreen>
 //                   </iframe>
 //                   {/* <video src={data.video} controls>
