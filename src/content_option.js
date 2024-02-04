@@ -7,34 +7,19 @@ const meta = {
 const introdata = {
     title: "I’m Rhea",
     animated: {
-        first: "A virtual AI.",
-        second: "Can help with your feelings.",
-        third: "Can tell you what you feel.",
+        first: "Your virtual buddy!",
+        second: "Can help you with your feelings.",
+        third: "Your real friend in virtual world.",
     },
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum",
+    description: "Meet RHEA, your virtual companion for delightful conversations and helpful insights. Your digital friend, always here to chat and assist. Explore the magic of connection!",
     your_img_url: "https://images.unsplash.com/photo-1514790193030-c89d266d5a9d",
 };
 
 const dataabout = {
-    title: "abit about my self",
+    title: "A bit about myself",
     aboutme: "Hello, I'm Rhea – Your AI Companion! 🌟 ",
 };
-const worktimeline = [{
-    jobtitle: "Check",
-    where: "WOrkholder",
-    date: "Video",
-},
-{
-    jobtitle: "Check",
-    where: "WOrkholder",
-    date: "Video",
-},
-{
-    jobtitle: "Check",
-    where: "WOrkholder",
-    date: "Video",
-},
-];
+
 
 const skills = [{
     name: "Feelings",
@@ -75,30 +60,26 @@ const dataportfolio = [{
 ];
 
 const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "123456789",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
+    YOUR_EMAIL: "helpdesk@gmail.com",
+    YOUR_FONE: "9876543210",
+    description: "Step into RHEA's world – your witty and responsive virtual friend. Chat, share, and explore together. Let's turn your virtual experience into a lively conversation!",
     YOUR_SERVICE_ID: "service_id",
     YOUR_TEMPLATE_ID: "template_id",
     YOUR_USER_ID: "user_id",
 };
 
-const socialprofils = {
-    github: "https://github.com",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://twitter.com",
+const socialprofiles = {
+    
 };
 export {
     meta,
     dataabout,
     dataportfolio,
-    worktimeline,
     skills,
     services,
     introdata,
     contactConfig,
-    socialprofils,
+    socialprofiles,
     logotext,
 
 };
