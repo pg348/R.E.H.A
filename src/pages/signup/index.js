@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
 import { Container, Row, Col, Alert } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { contactConfig } from "../../content_option";
 
@@ -39,7 +39,8 @@ export const Signup = () => {
       } else {
         setFormdata({
           ...formData,
-          alertmessage: "Sign up successful. Confirmation mail is sent. Click on it.",
+          alertmessage:
+            "Sign up successful. Confirmation mail is sent. Click on it.",
           variant: "success",
           show: true,
         });
@@ -48,9 +49,6 @@ export const Signup = () => {
       console.error("Error signing up with Supabase:", error.message);
     }
   };
-
-
-
 
   const handleGoogleSignIn = async () => {
     try {
@@ -67,14 +65,13 @@ export const Signup = () => {
       if (error) {
         alert(error.message);
       } else {
-        alert("Google sign up successful");
+        alert("Redirecting...");
         window.location.href = "./main";
         // Redirect or perform other actions after successful sign-up with Google
       }
     } catch (error) {
       console.error("Error signing up with Google:", error.message);
     }
-
   };
 
   const handleSubmit = (e) => {
@@ -123,8 +120,9 @@ export const Signup = () => {
           <Col lg="12">
             <Alert
               variant={formData.variant}
-              className={`rounded-0 co_alert ${formData.show ? "d-block" : "d-none"
-                }`}
+              className={`rounded-0 co_alert ${
+                formData.show ? "d-block" : "d-none"
+              }`}
               onClose={() => setFormdata({ show: false })}
               dismissible
             >
@@ -188,13 +186,20 @@ export const Signup = () => {
                   <button className="btn ac_btn" type="submit">
                     {formData.loading ? "Sending..." : "Sign Up"}
                   </button>
-                  <button className="btn ac_btn" type="button" onClick={handleGoogleSignIn}>
+                  <button
+                    className="btn ac_btn"
+                    type="button"
+                    onClick={handleGoogleSignIn}
+                  >
                     {formData.loading ? "Sending..." : "Signup using Google"}
                   </button>
                 </Col>
               </Row>
               <p style={{ marginTop: "10px" }}>
-                Already have an account? <Link to="/login" style={{ textDecoration: "underline" }}>Login</Link>
+                Already have an account?{" "}
+                <Link to="/login" style={{ textDecoration: "underline" }}>
+                  Login
+                </Link>
               </p>
             </form>
           </Col>
