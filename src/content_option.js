@@ -1,11 +1,11 @@
-const logotext = "RHEA";
+const logotext = "R.H.E.A";
 const meta = {
     title: "Realistic Human Emulation Assistant",
-    description: "I’m Rhea ",
+    description: "I’m R.H.E.A ",
 };
 
 const introdata = {
-    title: "I’m Rhea",
+    title: "I’m R.H.E.A",
     animated: {
         first: "Your virtual buddy!",
         second: "Can help you with your feelings.",
@@ -69,7 +69,7 @@ const contactConfig = {
 };
 
 const socialprofiles = {
-    
+
 };
 export {
     meta,
