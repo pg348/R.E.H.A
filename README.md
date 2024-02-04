@@ -8,18 +8,18 @@ Rhea, your AI companion, is an innovative step towards humanizing technology. Rh
 
 Key Features
 
-Conversational Intelligence: 
+Conversational Intelligence:
 Rhea is designed to understand and respond to user input in a natural and intelligent manner. This allows users to have meaningful and context-aware conversations with their AI companion.
 
-Voice Recognition: 
+Voice Recognition:
 Rhea employs advanced voice recognition technology, allowing her to accurately understand spoken language and respond accordingly. This creates a hands-free and user-friendly experience.
 
 Relevance to Future-tech Challenges:
-The development of Rhea addresses several future-tech challenges, contributing to the advancement of conversational AI and human-computer interaction. By focusing on natural language understanding, voice recognition, and adaptability, 
+The development of Rhea addresses several future-tech challenges, contributing to the advancement of conversational AI and human-computer interaction. By focusing on natural language understanding, voice recognition, and adaptability,
 
 Rhea aligns with the following challenges:
 
-Humanizing Technology: 
+Humanizing Technology:
 Rhea strives to make technology more human-centric, fostering a natural and effortless interaction between users and AI. This aligns with the challenge of humanizing technology to enhance user experience.
 
 Key Project Workflow:
@@ -56,7 +56,7 @@ How to Run the Project:
 To run the project please enter the following command in the terminal:
 
 Firstly:
-$ python api-index.py
+$ python index.py
 then,
 $ npm install
 then,
