@@ -47,7 +47,9 @@ export const Main = () => {
   function triggerAnimation2() {
     spline.current.emitEvent("keyDown", "Rhea");
   }
-
+  const signOutt = async () => {
+    await supabase.auth.signOut();
+  };
   const startRecording = () => {
     // const audioBlob = new Blob(chunks, { type: "audio/mp3" });
     navigator.mediaDevices
@@ -359,10 +361,7 @@ export const Main = () => {
             }}
           >
             <Link to="/home">
-              <button
-                className="btn ac_btn signout"
-                onClick={localStorage.clear()}
-              >
+              <button className="btn ac_btn signout" onClick={signOutt}>
                 Sign out
               </button>
             </Link>
