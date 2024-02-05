@@ -74,7 +74,7 @@ Skills: spline,api configuration
 Email: aviralchawla02@gmail.com
 
 Pratham Goel (Backend Developer)
-Skills: database management, api configuration
+Skills: DBMS,SQL, api configuration
 Email: pg348@snu.edu.in
 
 Aman Sagar (Front-end Developer)
